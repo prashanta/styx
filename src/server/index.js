@@ -5,7 +5,7 @@ import config from './config';
 import Inert from 'inert';
 import Routes from './routes';
 import pjson from '../../package.json';
-import './core/job';
+import device from './core/device';
 
 const server = new Hapi.Server({debug:{request:['error']}});
 
@@ -18,6 +18,8 @@ server.start((err)=>{
         throw err;
     }
     console.log(`Server running at ${server.info.uri}`);
+
+    device.run();
 });
 
 

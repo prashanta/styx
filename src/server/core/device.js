@@ -16,7 +16,7 @@ class Device{
     // Run device
     run(){
         // Initialize store
-        this.store.init()
+        this.store.setup()
         .then(function(result){
             // If credentials are present ...
             if(result.umid && result.token){
@@ -70,9 +70,7 @@ class Device{
             var temp = {token: '90210', umid: '90212'};
             this.store.setCredentials(temp.token, temp.umid)
             .then(function(result){
-                logger.log(result);
-                this.ready = true;
-                this.sendMachineData();
+                this.run();
                 resolve(result);
             }.bind(this));
         }.bind(this));

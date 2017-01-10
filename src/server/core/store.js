@@ -11,29 +11,35 @@ export default class Store{
     constructor(){
         this.dataFile = config.root+'/datafile';
         logger.log(this.dataFile);
-
+        this.init = false;
         this.token = '';
         this.umid = '';
 
         this.db = '';
     }
 
-    init(){
+    setup(){
         return new Promise(function(resolve,reject){
-            this.db = new Datastore({ filename: this.dataFile, autoload: true });
-            this.db.findOne({id:0},function(err, doc){
-                logger.log(doc);
-                if(doc === null){
-                    logger.log("No settings found .. adding empty setting");
-                    var temp = [{id: 0, token: '', umid: ''}];
-                    this.db.insert(temp);
-                }
-                else{
-                    this.token = doc.token;
-                    this.umid = doc.umid;
-                }
+            if(!this.init){
+                this.db = new Datastore({ filename: this.dataFile, autoload: true });
+                this.db.findOne({id:0},function(err, doc){
+                    logger.log(doc);
+                    if(doc === null){
+                        logger.log("No settings found .. adding empty setting");
+                        var temp = [{id: 0, token: '', umid: ''}];
+                        this.db.insert(temp);
+                    }
+                    else{
+                        this.token = doc.token;
+                        this.umid = doc.umid;
+                    }
+                    this.init = true;
+                    resolve({token: this.token, umid: this.umid});
+                }.bind(this));
+            }
+            else{
                 resolve({token: this.token, umid: this.umid});
-            }.bind(this));
+            }
         }.bind(this));
     }
 
