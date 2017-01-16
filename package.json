@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-server": "babel -d ./build/server ./src/server",
-    "start" : "node ./build/server/index"
+    "start": "node ./build/server/index"
   },
   "author": "",
   "license": "ISC",
@@ -25,11 +25,13 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "ably": "^0.8.41",
     "bluebird": "^3.4.7",
     "boom": "^4.2.0",
     "hapi": "^16.1.0",
     "inert": "^4.1.0",
     "nedb": "^1.8.0",
+    "pubnub": "^4.3.3",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
