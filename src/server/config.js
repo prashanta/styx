@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
 import path from 'path';
+import tracer from 'tracer';
 import pkg from '../../package.json';
 
 var rootPath = path.normalize(__dirname + '/../..');
@@ -32,5 +33,7 @@ config.REST_PATH_TOKEN_VALIDATE = '/api/v1/token/validate';
 config.REST_PATH_MACHINE_ACTIVATE = '/api/v1/machines/activate';
 
 config.ABLY_KEY = process.env.STYX_ABLY_KEY || 'rss_Lw.7ktoTg:0h0yF67nmvxI3tAQ';
+
+config.logger = tracer.console({level:config.logLevel});
 
 export default config;

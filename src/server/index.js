@@ -7,17 +7,17 @@ import Routes from './routes';
 import pjson from '../../package.json';
 import device from './core/device';
 
+var logger = config.logger;
+
+logger.log(`Starting application ... ${config.name} - ${config.version}`);
+
 const server = new Hapi.Server({debug:{request:['error']}});
-
-console.log(`Starting application ... ${config.name} - ${config.version}`);
-
 server.connection({host:'localhost', port: config.port});
-
 server.start((err)=>{
     if(err){
         throw err;
     }
-    console.log(`Server running at ${server.info.uri}`);
+    logger.log(`Server running at ${server.info.uri}`);
 
     // Start device
     device.run();

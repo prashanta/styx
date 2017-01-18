@@ -42,7 +42,7 @@ export default class Mdc{
                     //parser: SerialPort.parsers.raw
                 }, function(error){
                     if(error){
-                        logger.log(error.message);
+                        logger.error(error.message);
                         reject(error);
                     }
                     else{
@@ -89,7 +89,7 @@ export default class Mdc{
         }.bind(this));
     }
 
-    getMachineData(command){
+    sendCommand(command){
         return new Promise(function(resolve,reject){
             this._result = "";
             this.port.write(command+"\r\n", function(error){
@@ -103,15 +103,15 @@ export default class Mdc{
     }
 
     getQ100(){
-        return this.getMachineData('Q100');
+        return this.sendCommand('Q100');
     }
 
     getQ104(){
-        return this.getMachineData('Q104');
+        return this.sendCommand('Q104');
     }
 
     getQ500(){
-        return this.getMachineData('Q500');
+        return this.sendCommand('Q500');
     }
 
 }
