@@ -9,7 +9,7 @@ import device from './core/device';
 
 var logger = config.logger;
 
-logger.log(`Starting application ... ${config.name} - ${config.version}`);
+logger.info(`Starting application ... ${config.name} - ${config.version}`);
 
 const server = new Hapi.Server({debug:{request:['error']}});
 server.connection({host:'localhost', port: config.port});
@@ -17,7 +17,7 @@ server.start((err)=>{
     if(err){
         throw err;
     }
-    logger.log(`Server running at ${server.info.uri}`);
+    logger.info(`Server running at ${server.info.uri}`);
 
     // Start device
     device.run();

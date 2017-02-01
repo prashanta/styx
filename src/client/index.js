@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'whatwg-fetch'
 
 import Layout from './components/app';
 import Path from 'path';

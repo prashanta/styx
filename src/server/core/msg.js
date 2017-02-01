@@ -14,11 +14,13 @@ export default class Msg{
         this.realtime = null;
     }
 
-    initChannel(channelId){
+    init(machineId, channelId){
         if(!this.channel){
             this.channelId = channelId;
-            this.realtime = new Ably.Realtime({ key: config.ABLY_KEY });
+            this.realtime = new Ably.Realtime({ key: config.ABLY_KEY, clientId: machineId+"" });
             this.channel = this.realtime.channels.get(this.channelId);
+            this.channel.on(this.handleChannelChange);
+            this.channel.presence.enter();
             logger.log("channel initiated");
         }
     }
@@ -39,6 +41,10 @@ export default class Msg{
                 reject(new Error("Channel not initialized"));
             }
         }.bind(this));
+    }
+
+    handleChannelChange(state){
+      logger.log(state);
     }
 
 }

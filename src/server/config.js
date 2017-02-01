@@ -14,6 +14,12 @@ var _config = {
         SERVER_URL: 'http://localhost:3000'
     },
 
+    test: {
+        port: 5000, // server port
+        logLevel: 'log',
+        SERVER_URL: 'http://localhost:3000'
+    },
+
     production: {
         port: 80,
         logLevel: 'warn',
@@ -32,8 +38,13 @@ config.NET_CHK_HOSTNAME = 'www.google.com';
 config.REST_PATH_TOKEN_VALIDATE = '/api/v1/token/validate';
 config.REST_PATH_MACHINE_ACTIVATE = '/api/v1/machines/activate';
 
+config.MDC_INTERVAL = 1000;
 config.ABLY_KEY = process.env.STYX_ABLY_KEY || 'rss_Lw.7ktoTg:0h0yF67nmvxI3tAQ';
 
-config.logger = tracer.console({level:config.logLevel});
+config.logger = tracer.colorConsole({
+  level:config.logLevel,
+  format : "[{{timestamp}}] <{{title}}> ({{file}}:{{line}}) {{message}}",
+  dateformat : "dd mmm yy - HH:MM:ss(L) o",
+});
 
 export default config;

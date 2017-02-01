@@ -23,5 +23,12 @@ export default [
                 reply(error.message);
             });
         }
+    },
+    {
+        method: 'GET',
+        path: '/api/v1/settings',
+        handler: function(request, reply){
+            reply('Not implemented');
+        }
     }
 ];

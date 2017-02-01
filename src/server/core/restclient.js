@@ -3,26 +3,29 @@
 import request from 'request-promise';
 import Promise from 'bluebird';
 import config from '../config';
+import Err from '../error';
 
 var logger = config.logger;
 
 // VALIDATE TOKEN
-export function validateToken(machineId, token){
+export function validateToken(credential){
   return new Promise(function(resolve, reject) {
     request({
       uri: config.SERVER_URL + config.REST_PATH_TOKEN_VALIDATE,
-      headers: {
-        'Authorization': 'Bearer ' + token,
-      },
+      headers: {'Authorization': 'Bearer ' + credential.token},
       json: true
     })
     .then(function(result){
-      if(result.result === 1) resolve(result);
-      else reject(new Error('Something wrong, token could not be validated.'));
+      if(result.result === 1)
+        resolve(result);
+      else
+        reject(new Err.ServerNotFound());
     })
     .catch(function(error){
-      logger.error(error.message);
-      reject(error);
+      if(error.name === 'RequestError')
+        reject(new Err.ServerNotFound());
+      else
+        reject(error);
     });
   });
 }

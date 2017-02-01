@@ -40,7 +40,7 @@ export default class Setting{
       if(!this.initialized){
         // Create new data store
         this.db = new Datastore({ filename: this.dataFile, autoload: true });
-        // Find id=0 data row
+
         this.initDataRow(this.DATA_CREDENTIAL, this.credential)
         .bind(this)
         .then(function(result){
