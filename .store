@@ -1,2 +1,2 @@
-{"id":1,"comName":"/dev/cu.usbserial","baudRate":115200,"dataBits":8,"stopBits":1,"parity":"none","_id":"cPbM7KhkcpUzdL8I"}
+{"id":1,"comName":"/dev/tty.usbserial","baudRate":115200,"dataBits":8,"stopBits":1,"parity":"none","_id":"cPbM7KhkcpUzdL8I"}
 {"id":0,"machineId":1,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWNoaW5lSWQiOjEsImlhdCI6MTQ4NDczMzcwNX0.BQwkEnIJ_z3IhTMZo9umYVdC2nIbjt5O4nv1ftOSUZ8","channelId":"352bf2f0-d8cc-11e6-9343-0242ac110002","_id":"oCChgLEpWKHVUwMk"}

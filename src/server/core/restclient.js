@@ -3,7 +3,7 @@
 import request from 'request-promise';
 import Promise from 'bluebird';
 import config from '../config';
-import Err from '../error';
+import Errors from '../error';
 
 var logger = config.logger;
 
@@ -23,7 +23,13 @@ export function validateToken(credential){
     })
     .catch(function(error){
       if(error.name === 'RequestError')
-        reject(new Err.ServerNotFound());
+        reject(new Errors.ServerNotFound());
+      else if(error.name === 'StatusCodeError'){
+        if(error.statusCode === 401)
+          reject(new Errors.TokenNotValid());
+        else
+          reject(error);
+      }
       else
         reject(error);
     });

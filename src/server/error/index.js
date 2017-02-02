@@ -11,7 +11,7 @@ const scan = (dir, filelist = []) => {
   fs.readdirSync(dir).forEach(file => {
     if(fs.statSync(path.join(dir, file)).isDirectory())
       filelist =  scan(path.join(dir, file), filelist);
-    else if((file.indexOf(".") !== 0) && (file !== "index.js"))
+    else if((file.indexOf(".") !== 0) && (file !== "index.js") && (file !== "test.js"))
       filelist.push(path.join(dir, file));
   });
   return filelist;
@@ -30,7 +30,14 @@ scan(__dirname)
 });
 
 _errors.forEach(function(error) {
-  errors[error.name] = TypedError(error);
+  errors[error.name] = function (){
+      this.message = error.message;
+      this.name = error.name;
+      Error.captureStackTrace(this, errors[error.name]);
+  };
+  errors[error.name].prototype = Object.create(Error.prototype);
+  errors[error.name].prototype.constructor = errors[error.name];
+
 });
 
 export default errors;

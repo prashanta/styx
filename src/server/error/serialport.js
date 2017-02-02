@@ -1,10 +1,12 @@
 /*jshint esversion: 6 */
 
 export default {
-  SerialPortNotConnected: {
-    name : 'SerialPortNotConnected',
-    type : 'ServerError',
-    code : 101,
-    message: 'SerialPort not connected'
-  }
+    SerialPortFault: {
+        name : 'SerialPortFault',
+        type : 'ServerError',
+        code : 201,
+        message: 'Could not open serial port',
+        reason: null
+    }
+
 };
